@@ -74,17 +74,19 @@
       pointer-events: none;
     }
     #overlay {
-      position: absolute;
+      position: fixed; /* covers full phone screen, not only the game box */
       inset: 0;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0,0,0,0.94);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      z-index: 20;
-      padding: 10px 12px;
-      overflow: hidden; /* no scroll */
+      z-index: 100;
+      padding: 16px;
+      padding-top: max(16px, env(safe-area-inset-top));
+      padding-bottom: max(16px, env(safe-area-inset-bottom));
+      overflow: hidden;
       touch-action: auto;
       overscroll-behavior: none;
     }
@@ -262,42 +264,57 @@
       #mobile-controls { display: block; }
       #ui { font-size: 12px; top: 6px; left: 8px; right: 8px; }
       #overlay {
-        padding: 8px 10px;
-        padding-bottom: max(8px, env(safe-area-inset-bottom));
+        padding: 20px 18px;
+        padding-top: max(24px, env(safe-area-inset-top));
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
         overflow: hidden;
+        justify-content: center;
       }
-      #overlay h1 { font-size: 1.35rem; margin-bottom: 2px; }
-      #overlay p { font-size: 0.75rem; margin-bottom: 6px; }
+      #overlay h1 { font-size: 1.6rem; margin-bottom: 6px; }
+      #overlay p { font-size: 0.8rem; margin-bottom: 12px; }
       #level-select, #char-select {
         grid-template-columns: repeat(3, 1fr);
         max-width: 100%;
-        gap: 4px;
-        margin: 4px 0;
+        gap: 6px;
+        margin: 8px 0;
       }
-      .level-btn, .char-btn { padding: 7px 3px; font-size: 0.68rem; }
-      .login-form { max-width: 100%; margin: 4px 0; }
-      .login-form label { font-size: 0.7rem; }
-      .login-form input { font-size: 16px; padding: 9px 10px; margin-bottom: 6px; }
-      .btn { padding: 9px 16px; font-size: 0.9rem; min-height: 40px; margin: 2px; }
-      .btn.small { padding: 5px 10px; font-size: 0.75rem; }
-      #instructions { font-size: 0.65rem; margin-top: 4px; }
-      #highscores { font-size: 0.7rem; padding: 5px 8px; max-height: 28vh; }
+      .level-btn, .char-btn { padding: 10px 4px; font-size: 0.72rem; }
+      .login-form { max-width: 100%; width: 100%; margin: 8px 0 12px; }
+      .login-form label { font-size: 0.8rem; margin-bottom: 4px; }
+      .login-form input {
+        font-size: 16px;
+        padding: 12px 14px;
+        margin-bottom: 12px;
+      }
+      .btn {
+        padding: 12px 28px;
+        font-size: 1rem;
+        min-height: 48px;
+        margin: 4px;
+        width: auto;
+        min-width: 160px;
+      }
+      .btn.small { padding: 8px 14px; font-size: 0.8rem; min-height: 36px; min-width: 0; }
+      #instructions { font-size: 0.7rem; margin-top: 10px; }
+      #highscores { font-size: 0.75rem; padding: 8px 10px; max-height: 30vh; }
     }
     @media (max-height: 520px) {
-      #overlay h1 { font-size: 1.15rem; }
-      #overlay p { display: none; } /* hide subtitle on short screens */
+      #overlay h1 { font-size: 1.25rem; }
+      #overlay p { font-size: 0.7rem; margin-bottom: 6px; }
       #instructions { display: none; }
-      .login-form input { padding: 8px 10px; margin-bottom: 5px; }
-      .btn { padding: 8px 14px; min-height: 36px; }
-      #level-select, #char-select { gap: 3px; }
-      .level-btn, .char-btn { padding: 5px 2px; font-size: 0.62rem; }
+      .login-form input { padding: 10px 12px; margin-bottom: 8px; }
+      .btn { padding: 10px 20px; min-height: 42px; }
+      #level-select, #char-select { gap: 4px; }
+      .level-btn, .char-btn { padding: 6px 3px; font-size: 0.65rem; }
     }
     @media (max-height: 500px) and (orientation: landscape) {
       canvas { max-height: 85dvh; }
       #mobile-controls { bottom: 6px; right: 10px; }
       .control-btn { width: 56px; height: 56px; font-size: 22px; }
-      #overlay h1 { font-size: 1.1rem; }
+      #overlay h1 { font-size: 1.15rem; }
       #overlay p, #instructions { display: none; }
+      .login-form { margin: 4px 0; }
+      .login-form input { padding: 8px 10px; margin-bottom: 6px; }
     }
   </style>
 </head>
